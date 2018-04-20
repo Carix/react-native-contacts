@@ -220,58 +220,59 @@ public class ContactsProvider {
                     }
                     contact.phones.add(new Contact.Item(label, phoneNumber));
                 }
-            } else if (mimeType.equals(Email.CONTENT_ITEM_TYPE)) {
-                String email = cursor.getString(cursor.getColumnIndex(Email.ADDRESS));
-                int type = cursor.getInt(cursor.getColumnIndex(Email.TYPE));
+            } 
+            //  else if (mimeType.equals(Email.CONTENT_ITEM_TYPE)) {
+            //    String email = cursor.getString(cursor.getColumnIndex(Email.ADDRESS));
+            //    int type = cursor.getInt(cursor.getColumnIndex(Email.TYPE));
 
-                if (!TextUtils.isEmpty(email)) {
-                    String label;
-                    switch (type) {
-                        case Email.TYPE_HOME:
-                            label = "home";
-                            break;
-                        case Email.TYPE_WORK:
-                            label = "work";
-                            break;
-                        case Email.TYPE_MOBILE:
-                            label = "mobile";
-                            break;
-                        case Email.TYPE_CUSTOM:
-                            if (cursor.getString(cursor.getColumnIndex(Email.LABEL)) != null) {
-                                label = cursor.getString(cursor.getColumnIndex(Email.LABEL)).toLowerCase();
-                            } else {
-                                label = "";
-                            }
-                            break;
-                        default:
-                            label = "other";
-                    }
-                    contact.emails.add(new Contact.Item(label, email));
-                }
-            } else if (mimeType.equals(Organization.CONTENT_ITEM_TYPE)) {
-                contact.company = cursor.getString(cursor.getColumnIndex(Organization.COMPANY));
-                contact.jobTitle = cursor.getString(cursor.getColumnIndex(Organization.TITLE));
-                contact.department = cursor.getString(cursor.getColumnIndex(Organization.DEPARTMENT));
-            } else if (mimeType.equals(StructuredPostal.CONTENT_ITEM_TYPE)) {
-                contact.postalAddresses.add(new Contact.PostalAddressItem(cursor));
-            } else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
-                int eventType = cursor.getInt(cursor.getColumnIndex(Event.TYPE));
-                if (eventType == Event.TYPE_BIRTHDAY) {
-                    String birthday = cursor.getString(cursor.getColumnIndex(Event.START_DATE)).replace("--", "");
-                    String[] yearMonthDay = birthday.split("-");
-                    List<String> yearMonthDayList = Arrays.asList(yearMonthDay);
-                    if (yearMonthDayList.size() == 2) {
-                        int month = Integer.parseInt(yearMonthDayList.get(0));
-                        int day = Integer.parseInt(yearMonthDayList.get(1));
-                        contact.birthday = new Contact.Birthday(new Date(0).getYear(), month, day);
-                    } else {
-                        int year = Integer.parseInt(yearMonthDayList.get(0));
-                        int month = Integer.parseInt(yearMonthDayList.get(1));
-                        int day = Integer.parseInt(yearMonthDayList.get(2));
-                        contact.birthday = new Contact.Birthday(year, month, day);
-                    }
-                }
-            }
+            //    if (!TextUtils.isEmpty(email)) {
+            //        String label;
+            //        switch (type) {
+            //            case Email.TYPE_HOME:
+            //                label = "home";
+            //                break;
+            //            case Email.TYPE_WORK:
+            //                label = "work";
+            //                break;
+            //            case Email.TYPE_MOBILE:
+            //                label = "mobile";
+            //                break;
+            //            case Email.TYPE_CUSTOM:
+            //                if (cursor.getString(cursor.getColumnIndex(Email.LABEL)) != null) {
+            //                    label = cursor.getString(cursor.getColumnIndex(Email.LABEL)).toLowerCase();
+            //                } else {
+            //                    label = "";
+            //                }
+            //                break;
+            //            default:
+            //                label = "other";
+            //        }
+            //        contact.emails.add(new Contact.Item(label, email));
+            //    }
+            //} else if (mimeType.equals(Organization.CONTENT_ITEM_TYPE)) {
+            //    contact.company = cursor.getString(cursor.getColumnIndex(Organization.COMPANY));
+            //    contact.jobTitle = cursor.getString(cursor.getColumnIndex(Organization.TITLE));
+            //    contact.department = cursor.getString(cursor.getColumnIndex(Organization.DEPARTMENT));
+            //} else if (mimeType.equals(StructuredPostal.CONTENT_ITEM_TYPE)) {
+            //    contact.postalAddresses.add(new Contact.PostalAddressItem(cursor));
+            //} else if (mimeType.equals(Event.CONTENT_ITEM_TYPE)) {
+            //    int eventType = cursor.getInt(cursor.getColumnIndex(Event.TYPE));
+            //    if (eventType == Event.TYPE_BIRTHDAY) {
+            //        String birthday = cursor.getString(cursor.getColumnIndex(Event.START_DATE)).replace("--", "");
+            //        String[] yearMonthDay = birthday.split("-");
+            //        List<String> yearMonthDayList = Arrays.asList(yearMonthDay);
+            //        if (yearMonthDayList.size() == 2) {
+            //            int month = Integer.parseInt(yearMonthDayList.get(0));
+            //            int day = Integer.parseInt(yearMonthDayList.get(1));
+            //            contact.birthday = new Contact.Birthday(new Date(0).getYear(), month, day);
+            //        } else {
+            //            int year = Integer.parseInt(yearMonthDayList.get(0));
+            //            int month = Integer.parseInt(yearMonthDayList.get(1));
+            //            int day = Integer.parseInt(yearMonthDayList.get(2));
+            //            contact.birthday = new Contact.Birthday(year, month, day);
+            //        }
+            //    }
+            //}
         }
 
         return map;
